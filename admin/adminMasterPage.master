@@ -1,0 +1,139 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="adminMasterPage.master.cs" Inherits="admin_adminMasterPage" %>
+
+<!DOCTYPE html>
+<html lang="hi">
+<head id="Head1" runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ITDuniya Admin | Dashboard</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <style>
+        :root {
+            --sidebar-bg: #111827; /* Darker Slate for Premium Feel */
+            --sidebar-hover: #1f2937;
+            --accent-color: #00c4cc; /* ITDuniya Cyan */
+            --text-muted: #9ca3af;
+            --bg-body: #f9fafb;
+        }
+
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); margin: 0; }
+
+        /* --- Sidebar Navigation --- */
+        .sidebar { 
+            height: 100vh; width: 260px; position: fixed; 
+            background: var(--sidebar-bg); z-index: 1000;
+            overflow-y: auto; overflow-x: hidden; transition: 0.3s;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .sidebar-brand { padding: 30px 24px; }
+        .sidebar-brand h4 { 
+            color: #fff; font-weight: 800; letter-spacing: -0.5px; 
+            margin: 0; font-size: 1.5rem; 
+        }
+        .sidebar-brand span { color: var(--accent-color); }
+
+        /* Group Labels */
+        .nav-group-label {
+            padding: 20px 24px 10px; font-size: 11px;
+            font-weight: 700; color: #4b5563;
+            text-transform: uppercase; letter-spacing: 1.2px;
+        }
+
+        .sidebar a { 
+            color: var(--text-muted); text-decoration: none; padding: 12px 24px; 
+            display: flex; align-items: center; font-size: 14px; 
+            font-weight: 500; transition: 0.2s ease;
+        }
+        .sidebar a i { width: 28px; font-size: 1.1rem; }
+        .sidebar a:hover { background: var(--sidebar-hover); color: var(--accent-color); }
+        
+        /* Logout Section */
+        .sidebar-footer { padding: 20px 0; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .logout-btn { color: #ef4444 !important; }
+        .logout-btn:hover { background: rgba(239, 68, 68, 0.1) !important; }
+
+        /* --- Main Layout --- */
+        .main-wrapper { margin-left: 260px; transition: 0.3s; }
+        
+        .top-nav { 
+            background: #fff; height: 70px; padding: 0 30px; 
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 999;
+        }
+
+        .admin-content { padding: 32px; min-height: calc(100vh - 70px); }
+
+        /* Scrollbar Styling */
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: #374151; border-radius: 10px; }
+
+        @media (max-width: 992px) {
+            .sidebar { width: 70px; }
+            .sidebar span, .sidebar .nav-group-label, .sidebar-brand small { display: none; }
+            .main-wrapper { margin-left: 70px; }
+            .sidebar-brand h4 { font-size: 1rem; }
+        }
+    </style>
+    <asp:ContentPlaceHolder id="head" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <nav class="sidebar">
+            <div class="sidebar-brand">
+                <h4>IT<span>DUNIYA</span></h4>
+                <small class="text-muted fw-bold" style="font-size: 9px; letter-spacing: 1px;">SYSTEM ADMINISTRATION</small>
+            </div>
+
+            <div class="nav-group-label">Analytics</div>
+            <a href="admindashboard.aspx"><i class="fa-solid fa-house-chimney"></i> <span>Dashboard Home</span></a>
+
+            <div class="nav-group-label">Educational Content</div>
+            <a href="managecategories.aspx"><i class="fa-solid fa-shapes"></i> <span>Categories Hub</span></a>
+            <a href="managelearnit.aspx"><i class="fa-solid fa-graduation-cap"></i> <span>Tutorial Library</span></a>
+            <a href="manageblog.aspx"><i class="fa-solid fa-newspaper"></i> <span>Blog Posts</span></a>
+
+            <div class="nav-group-label">Project & Resources</div>
+            <a href="manageprojects.aspx"><i class="fa-solid fa-code-branch"></i> <span>Portfolio Projects</span></a>
+            <a href="uploadnotes.aspx"><i class="fa-solid fa-cloud-arrow-up"></i> <span>Student Notes (PDF)</span></a>
+
+            <div class="nav-group-label">System Support</div>
+            <a href="manageerrors.aspx"><i class="fa-solid fa-bug-slash"></i> <span>Error Database</span></a>
+            <a href="viewmessages.aspx"><i class="fa-solid fa-inbox"></i> <span>User Messages</span></a>
+
+            <div class="sidebar-footer">
+                <asp:LinkButton ID="btnLogout" runat="server" OnClick="btnLogout_Click" CssClass="logout-btn">
+                    <i class="fa-solid fa-power-off"></i> <span>Terminate Session</span>
+                </asp:LinkButton>
+            </div>
+        </nav>
+
+        <div class="main-wrapper">
+            <header class="top-nav">
+                <div class="d-flex align-items-center">
+                    <h6 class="m-0 fw-bold text-dark">Welcome back</h6>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="text-end me-3 d-none d-md-block">
+                        <div class="fw-bold small">System Administrator</div>
+                        <div class="text-success small fw-bold" style="font-size: 10px;"><i class="fa-solid fa-circle me-1"></i> ACTIVE</div>
+                    </div>
+                    <div class="bg-light p-2 rounded-circle border">
+                        <i class="fa-solid fa-user-gear text-secondary"></i>
+                    </div>
+                </div>
+            </header>
+
+            <main class="admin-content">
+                <asp:ContentPlaceHolder id="ContentPlaceHolder2" runat="server"></asp:ContentPlaceHolder>
+            </main>
+        </div>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

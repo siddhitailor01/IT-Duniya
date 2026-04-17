@@ -1,0 +1,369 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+<html lang="hi">
+<head id="Head1" runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>IT Duniya | BCA, BSc-IT Notes, Programming Tutorials & Solved IT Errors</title>
+    <meta name="description" content="IT Duniya: Bhilwara's premier IT education hub. Get high-quality BCA, BSc-IT, and Engineering notes, programming tutorials, source codes, and expert solutions for IT errors." />
+    <meta name="keywords" content="IT Duniya, BCA Notes, BSc-IT Tutorials, Engineering Programming, Solved IT Errors, Learn Coding, Bhilwara IT Education, Web Development Tutorials, Python C++ Java Notes" />
+    <meta name="author" content="IT Duniya" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.itduniya.com/" />
+    <meta property="og:title" content="IT Duniya - Connect, Learn & Build" />
+    <meta property="og:description" content="Bhilwara's best IT education portal for students. Download notes, solve errors, and learn programming." />
+    <meta property="og:image" content="https://www.itduniya.com/images/og-image.jpg" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="IT Duniya - Educational IT Portal" />
+    <meta property="twitter:description" content="Access BCA, BSc-IT, and Engineering resources at one place." />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* Ye horizontal scroll ko puri tarah khatam kar dega */
+}
+
+/* Bootstrap rows kabhi kabhi negative margin ki wajah se scroll laate hain */
+.row {
+    --bs-gutter-x: 0; 
+    margin-right: 0;
+    margin-left: 0;
+}
+        /* --- Deep Teal Startup Theme --- */
+        :root {
+            --bg-deep: #003a4d;    /* Image ka Navy Teal */
+            --accent: #00c4cc;     /* Image ka Cyan accent */
+            --text-gray: #b3c7cd;
+        }
+
+        body { font-family: 'Inter', sans-serif; background: #fdfdfd; margin: 0; padding: 0; }
+
+        /* --- Top Header Bar --- */
+        .top-header {
+            background: var(--bg-deep); color: white;
+            padding: 8px 0; font-size: 13px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .top-info span { margin-left: 20px; opacity: 0.9; }
+        .top-info i { color: var(--accent); margin-right: 5px; }
+
+        /* --- Modern Navbar --- */
+        .navbar { background: var(--bg-deep) !important; padding: 23px 0; }
+        .navbar-brand { font-weight: 800; color: white !important; font-size: 24px; letter-spacing: -0.5px; }
+        .navbar-brand span { font-weight: 300; color: var(--accent); }
+
+        .nav-link { 
+            color: white !important; font-weight: 700; text-transform: uppercase; 
+            font-size: 13px; margin: 0 8px; transition: 0.3s; letter-spacing: 0.5px;
+        }
+        .nav-link:hover, .nav-item.show .nav-link { color: var(--accent) !important; }
+
+
+        /* --- Desktop Navbar (Already exists, just keep it) --- */
+.navbar { background: var(--bg-deep) !important; padding: 15px 0; transition: 0.3s; }
+
+/* --- Mobile/Tablet Responsive Fix --- */
+@media (max-width: 991px) {
+    .navbar { padding: 10px 0; }
+    
+    /* Navbar Collapse background fix */
+    .navbar-collapse {
+        background: var(--bg-deep);
+        padding: 20px;
+        border-radius: 0 0 15px 15px;
+        margin-top: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* Links ko stack karein */
+    .nav-link { 
+        margin: 5px 0; 
+        padding: 12px 0; 
+        border-bottom: 1px solid rgba(255,255,255,0.05); 
+    }
+
+    /* Action buttons (Login/Search/Call) ko mobile par organize karein */
+    .navbar-actions-wrapper {
+        flex-direction: column;
+        align-items: flex-start !important;
+        margin-top: 15px;
+    }
+
+    .call-action {
+        border-left: none;
+        padding-left: 0;
+        margin-top: 15px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 15px;
+        width: 100%;
+    }
+
+    .search-trigger {
+        padding: 10px 0;
+        display: block;
+    }
+}
+
+        /* Dropdown Styling */
+        .dropdown-menu { 
+            background: #ffffff; border: none; border-radius: 8px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-top: 15px; padding: 10px;
+        }
+        .dropdown-item { 
+            font-size: 13px; font-weight: 600; padding: 10px 15px; 
+            border-radius: 5px; transition: 0.2s; color: var(--bg-deep);
+        }
+        .dropdown-item:hover { background: #f0f7f9; color: var(--accent); }
+
+        .call-action { color: white; font-weight: 700; font-size: 13px; border-left: 1px solid rgba(255,255,255,0.2); padding-left: 20px; }
+        .call-action span { color: var(--accent); margin-left: 5px; }
+
+        /* --- Footer Styles (Matching Image) --- */
+        footer { background: var(--bg-deep); color: white; padding: 80px 0 30px; }
+        footer h5 { 
+            color: white; font-weight: 700; text-transform: uppercase; 
+            font-size: 15px; margin-bottom: 30px; letter-spacing: 1px;
+        }
+        .footer-desc { color: var(--text-gray); font-size: 14px; line-height: 1.8; margin-bottom: 25px; }
+        
+        .social-btns a { 
+            display: inline-flex; width: 36px; height: 36px; background: rgba(255,255,255,0.1); 
+            color: white; align-items: center; justify-content: center; border-radius: 3px; 
+            margin-right: 8px; transition: 0.3s; text-decoration: none;
+        }
+        .social-btns a:hover { background: var(--accent); transform: translateY(-3px); }
+
+        .footer-list { list-style: none; padding: 0; }
+        .footer-list li { margin-bottom: 12px; }
+        .footer-list a { 
+            color: var(--text-gray); text-decoration: none; font-size: 14px; transition: 0.2s;
+            display: flex; align-items: center;
+        }
+        .footer-list a::before { content: "-"; color: var(--accent); margin-right: 10px; font-weight: bold; }
+        .footer-list a:hover { color: var(--accent); padding-left: 5px; }
+
+        /* Contact Details Card */
+        .contact-card { background: rgba(0,0,0,0.15); padding: 25px; border-radius: 4px; }
+        .contact-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dotted rgba(255,255,255,0.1); font-size: 14px; }
+        .contact-row:last-child { border: none; }
+        .label { font-weight: 700; color: white; }
+        .value { color: var(--text-gray); text-align: right; }
+
+        .copyright { border-top: 1px solid rgba(255,255,255,0.08); margin-top: 60px; padding-top: 30px; font-size: 13px; color: var(--text-gray); }
+
+        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--accent); z-index: 10000; }
+
+        /* Search Icon Button Style */
+        .search-trigger {
+            color: white;
+            font-size: 18px;
+            transition: 0.3s;
+            text-decoration: none;
+            padding: 10px;
+        }
+        .search-trigger:hover { color: var(--accent); }
+
+        /* Modal Content Styling */
+        .search-overlay-box { padding: 20px; }
+        .search-premium-group { border-radius: 50px; overflow: hidden; }
+        .search-premium-group .form-control {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        .search-premium-group .form-control:focus { box-shadow: none; }
+
+        /* Backdrop Blur effect */
+        .modal-backdrop.show { opacity: 0.8; backdrop-filter: blur(8px); background-color: var(--bg-deep); }
+    </style>
+
+    <asp:ContentPlaceHolder id="head" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <div id="scroll-progress"></div>
+
+    <form id="form1" runat="server">
+        <div class="top-header d-none d-lg-block">
+            <div class="container d-flex justify-content-end">
+                <div class="top-info">
+                    <span><i class="fa-solid fa-location-dot"></i> Bhilwara, Rajasthan, India</span>
+                    <span><i class="fa-solid fa-envelope"></i>   
+                        <a href="mailto:support.itduniya@gmail.com" class="text-decoration-none" style="color: inherit;">
+                            support.itduniya@gmail.com
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.aspx">
+            <i class="fa-solid fa-microchip"></i> IT<span>DUNIYA</span>
+        </a>
+
+        <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="index.aspx">Home</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Learn IT</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="learnit.aspx">Tutorials</a></li>
+                        <li><a class="dropdown-item" href="notes.aspx">PDF Notes</a></li>
+                        <li><a class="dropdown-item" href="errors.aspx">Solved Errors</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="projects.aspx">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="blog.aspx">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.aspx">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.aspx">Contact</a></li>
+            </ul>
+
+            <div class="navbar-actions-wrapper d-flex align-items-center">
+                <div class="me-lg-3 mb-3 mb-lg-0">
+                    <% if (Session["StudentID"] == null) { %>
+                        <a href="studentlogin.aspx" class="btn btn-sm btn-info rounded-pill px-4 fw-bold text-white shadow-sm w-100" style="background:var(--accent); border:none;">LOGIN</a>
+                    <% } else { %>
+                        <a href="studentdashboard.aspx" class="btn btn-sm btn-outline-light rounded-pill px-4 fw-bold w-100">DASHBOARD</a>
+                    <% } %>
+                </div>
+                
+                <div class="call-action d-lg-block">
+                    <span class="d-lg-none text-white-50 small d-block mb-1">Contact Us:</span>
+                    <a href="tel:+919610229171" class="text-decoration-none" style="color: inherit;">
+                        <i class="fa-solid fa-phone-volume me-2 text-info d-lg-none"></i>12345-67890
+                    </a>
+                </div>
+
+             <%-- Check karein ki current page Notes ya Errors toh nahi hai --%>
+<% if (!Request.RawUrl.ToLower().Contains("notes.aspx") && !Request.RawUrl.ToLower().Contains("errors.aspx")) { %>
+    <div class="ms-lg-3 mt-3 mt-lg-0">
+        <a href="#" class="search-trigger" data-bs-toggle="modal" data-bs-target="#searchModal">
+            <i class="fa-solid fa-magnifying-glass me-2 d-lg-none"></i>
+            <span class="d-lg-none">Search IT Duniya</span>
+            <i class="fa-solid fa-magnifying-glass d-none d-lg-inline"></i>
+        </a>
+    </div>
+<% } %>
+            </div>
+        </div>
+    </div>
+</nav>
+
+        <div class="main-content">
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-4 col-md-6">
+                        <h4>IT DUNIYA</h4>
+                        <p class="footer-desc">Bhilwara's premier IT education hub. We provide high-quality tutorials, source codes, and error solutions for BCA, BSc-IT, and Engineering students.</p>
+                        <div class="social-btns">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <h5>Resources</h5>
+                        <ul class="footer-list">
+                            <li><a href="projects.aspx">Projects and Portfolio</a></li>
+                            <li><a href="about.aspx">About Us & Team</a></li>
+                            <li><a href="learnit.aspx">Learning Tutorials</a></li>
+                            <li><a href="contact.aspx">Contact Support</a></li>
+                            <li><a href="blog.aspx">Latest Tech News</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="contact-card">
+                            <div class="contact-row">
+                                <span class="label">Address</span>
+                                <span class="value">Bhilwara, Rajasthan, India</span>
+                            </div>
+                            <div class="contact-row">
+                                <span class="label">Email</span>
+                                <span class="value">
+                                    <a href="mailto:support.itduniya@gmail.com" class="text-decoration-none" style="color: inherit;">
+                                        support.itduniya@gmail.com
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="contact-row">
+                                <span class="label">Phone</span>
+                                <span class="value">
+                                    <a href="tel:+911234567890" class="text-decoration-none" style="color: inherit;">
+                                        +91 12345 67890
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="contact-row">
+                                <span class="label">Support</span>
+                                <span class="value">24/7 Online Help</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copyright d-flex flex-column flex-md-row justify-content-between align-items-center">
+                    <p>© 2025 IT Duniya - Educational Portal. All rights reserved.</p>
+                    <div>
+                        <a href="contact.aspx" class="text-decoration-none text-info small">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <%--////////////////SEARCH BAR MODEL--%>
+        <%-- Search Modal ko bhi sirf tabhi dikhayein jab in pages par na ho --%>
+<% if (!Request.RawUrl.ToLower().Contains("notes.aspx") && !Request.RawUrl.ToLower().Contains("errors.aspx")) { %>
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-transparent border-0">
+                    <div class="modal-body p-0">
+                        <div class="search-overlay-box">
+                            <button type="button" class="btn-close btn-close-white mb-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="input-group search-premium-group shadow-lg">
+                                <span class="input-group-text bg-white border-0 ps-4">
+                                    <i class="fa-solid fa-magnifying-glass text-muted"></i>
+                                </span>
+                                <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control form-control-lg border-0 py-4" placeholder="Type to search tutorials, notes, blogs..."></asp:TextBox>
+                                <asp:Button ID="btnSearchAction" runat="server" Text="SEARCH" OnClick="lnkSearch_Click" CssClass="btn btn-info px-5 fw-bold text-white" style="background:var(--accent); border:none;" />
+                            </div>
+                            <p class="text-white-50 mt-3 text-center small">Press <span class="badge bg-dark">Enter</span> to search across all IT modules.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.onscroll = function () {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
