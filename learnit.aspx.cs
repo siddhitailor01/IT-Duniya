@@ -10,7 +10,6 @@ public partial class learnit : System.Web.UI.Page
 {
     string connStr = ConfigurationManager.ConnectionStrings["MyDbConn"].ConnectionString;
 
-    // ViewState to keep track of current page during postbacks
     public int CurrentPage
     {
         get { return ViewState["CurrentPage"] != null ? (int)ViewState["CurrentPage"] : 0; }
@@ -42,7 +41,7 @@ public partial class learnit : System.Web.UI.Page
 
     protected void Filter_Click(object sender, EventArgs e)
     {
-        CurrentPage = 0; // Reset pagination on new filter
+        CurrentPage = 0; 
         LinkButton btn = (LinkButton)sender;
         string category = btn.CommandArgument;
         SetActiveButton(category);
@@ -69,7 +68,7 @@ public partial class learnit : System.Web.UI.Page
                 PagedDataSource pds = new PagedDataSource();
                 pds.DataSource = dt.DefaultView;
                 pds.AllowPaging = true;
-                pds.PageSize = 6; // Tutorials per page
+                pds.PageSize = 6; 
                 pds.CurrentPageIndex = CurrentPage;
 
                 rptTutorials.DataSource = pds;
@@ -77,7 +76,6 @@ public partial class learnit : System.Web.UI.Page
                 rptTutorials.Visible = true;
                 pnlNoTutorials.Visible = false;
 
-                // Create Page Numbers
                 ArrayList pages = new ArrayList();
                 for (int i = 0; i < pds.PageCount; i++) pages.Add(i);
                 rptPagination.DataSource = pages;
