@@ -11,18 +11,16 @@ public partial class notes : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            BindNotes(); // Pehli baar saare notes dikhayega
+            BindNotes(); 
         }
     }
 
-    // BindNotes method ab search term bhi handle karega
     private void BindNotes(string searchTerm = "")
     {
         using (SqlConnection con = new SqlConnection(connStr))
         {
             string query = "SELECT * FROM Notes";
 
-            // Agar search box mein kuch likha hai
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 query += " WHERE Title LIKE @search OR Category LIKE @search";
@@ -50,12 +48,11 @@ public partial class notes : System.Web.UI.Page
             else
             {
                 rptNotesList.Visible = false;
-                lblNoResult.Visible = true; // No Result found dikhayega
+                lblNoResult.Visible = true; 
             }
         }
     }
 
-    // Search button click event
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         string search = txtSearch.Text.Trim();

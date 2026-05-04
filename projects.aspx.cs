@@ -5,14 +5,12 @@ using System.Configuration;
 
 public partial class projects : System.Web.UI.Page
 {
-    // Web.config se connection string lena
     string connStr = ConfigurationManager.ConnectionStrings["MyDbConn"].ConnectionString;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            // Level parameter check karna
             string levelFilter = Request.QueryString["lvl"];
             BindProjects(levelFilter);
         }
@@ -41,7 +39,6 @@ public partial class projects : System.Web.UI.Page
             DataTable dt = new DataTable();
             adp.Fill(dt);
 
-            // Repeater ko bind karna
             rptAllProjects.DataSource = dt;
             rptAllProjects.DataBind();
         }
