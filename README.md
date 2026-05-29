@@ -1,1 +1,1 @@
-IT-Duniya Portal 
+IT-Duniya Website 
